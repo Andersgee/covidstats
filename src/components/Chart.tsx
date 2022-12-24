@@ -13,7 +13,7 @@ export function Chart({ data }: Props) {
   const [ref, bounds] = useMeasure();
 
   return (
-    <div className="relative aspect-21/9 w-full" ref={ref}>
+    <div className="relative mt-2 mb-4 aspect-21/9 w-full" ref={ref}>
       {bounds.width > 0 && <ChartInner list={data} width={bounds.width} height={bounds.height} />}
     </div>
   );
@@ -127,7 +127,7 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
       </div>
       <svg
         ref={ref}
-        onMouseEnter={() => setIsHovering(true)}
+        onMouseOver={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
         onMouseMove={handleMouseMove}
         className={`h-full w-full overflow-x-hidden`}
