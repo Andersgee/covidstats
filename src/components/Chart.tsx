@@ -112,12 +112,16 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
       >
         {isHovering && hoveredIndex !== undefined && (
           <>
-            <p className="text-sm">{format(dates[hoveredIndex], "yyyy-MM-dd")}</p>
-            <p className="text-sm">procent: {Math.round(list[hoveredIndex][KEYS.Kum_fall_100000inv] / 1000)}%</p>
-            <p>antal totalt</p>
-            <p className="text-sm">fall: {list[hoveredIndex][KEYS.Kum_antal_fall]}</p>
-            <p className="text-sm">avlidna: {list[hoveredIndex][KEYS.Kum_antal_avlidna]}</p>
-            <p className="text-sm">intensivvårdade {list[hoveredIndex][KEYS.Kum_antal_intensivvårdade]}</p>
+            <p className="whitespace-nowrap text-sm">{format(dates[hoveredIndex], "yyyy-MM-dd")}</p>
+            <p className="whitespace-nowrap text-sm">
+              procent: {Math.round(list[hoveredIndex][KEYS.Kum_fall_100000inv] / 1000)}%
+            </p>
+            <p className="whitespace-nowrap text-sm">antal totalt</p>
+            <p className="whitespace-nowrap text-sm">fall: {list[hoveredIndex][KEYS.Kum_antal_fall]}</p>
+            <p className="whitespace-nowrap text-sm">avlidna: {list[hoveredIndex][KEYS.Kum_antal_avlidna]}</p>
+            <p className="whitespace-nowrap text-sm">
+              intensivvårdade {list[hoveredIndex][KEYS.Kum_antal_intensivvårdade]}
+            </p>
           </>
         )}
       </div>

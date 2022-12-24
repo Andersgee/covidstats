@@ -9,6 +9,7 @@
 const config = {
   reactStrictMode: true,
   swcMinify: true,
+  staticPageGenerationTimeout: 120,
   i18n: {
     locales: ["en"],
     defaultLocale: "en",
