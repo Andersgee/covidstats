@@ -66,13 +66,11 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   const [hoveredIndex, setHoveredIndex] = useState<number | undefined>(undefined);
-  const [isHovering, setIsHovering] = useState(false);
 
-  //const [hoveredData, sethoveredData] = useState<{ val: number; date: Date } | undefined>(undefined);
   const handleMouseMove = (e: React.PointerEvent<SVGSVGElement>) => {
     const svgElement = ref.current;
     const tooltipElement = tooltipRef.current;
-    if (!isHovering || !svgElement || !tooltipElement) {
+    if (!svgElement || !tooltipElement) {
       return;
     }
 
@@ -109,10 +107,10 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
       <div
         ref={tooltipRef}
         className={`${
-          isHovering ? "" : "hidden"
+          hoveredIndex === undefined ? "hidden" : ""
         } pointer-events-none absolute translate-x-[-50%] translate-y-[-105%] rounded-sm bg-white p-2 text-black dark:bg-black dark:text-white`}
       >
-        {isHovering && hoveredIndex !== undefined && (
+        {hoveredIndex !== undefined && (
           <>
             <p className="whitespace-nowrap text-sm">{format(dates[hoveredIndex], "yyyy-MM-dd")}</p>
             <p className="whitespace-nowrap text-sm">
@@ -129,8 +127,7 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
       </div>
       <svg
         ref={ref}
-        onPointerOver={() => setIsHovering(true)}
-        onPointerLeave={() => setIsHovering(false)}
+        onPointerLeave={() => setHoveredIndex(undefined)}
         onPointerMove={handleMouseMove}
         className="h-full w-full select-none overflow-x-hidden"
         viewBox={`0 0 ${width} ${height}`}
@@ -202,7 +199,7 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
           return <circle key={i} r="2" cx={xPoints[i]} cy={yScale(val)} />;
         }) */}
 
-        {isHovering && hoveredIndex !== undefined && (
+        {hoveredIndex !== undefined && (
           <circle
             r="6"
             cx={xPoints[hoveredIndex]}
