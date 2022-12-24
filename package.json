@@ -2,32 +2,42 @@
   "name": "covid19",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "tsnode": "NODE_ENV=development node --experimental-specifier-resolution=node --loader ts-node/esm/transpile-only"
   },
   "dependencies": {
+    "d3": "^7.8.0",
+    "date-fns": "^2.29.3",
+    "framer-motion": "^8.0.1",
     "next": "13.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-use-measure": "^2.1.1",
     "zod": "^3.18.0"
   },
   "devDependencies": {
+    "@types/d3": "^7.4.0",
     "@types/node": "^18.0.0",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
     "autoprefixer": "^10.4.7",
+    "dotenv": "^16.0.3",
     "eslint": "^8.26.0",
     "eslint-config-next": "13.0.2",
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
     "tailwindcss": "^3.2.0",
-    "typescript": "^4.8.4"
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4",
+    "xlsx": "^0.18.5"
   },
   "ct3aMetadata": {
     "initVersion": "6.11.4"
