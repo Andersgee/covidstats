@@ -92,8 +92,8 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
 
     setHoveredIndex(index);
 
-    let y = yScale(list[index][KEYS.Kum_fall_100000inv]);
-    let x = xScale(dates[index]);
+    const y = yScale(list[index][KEYS.Kum_fall_100000inv]);
+    const x = xScale(dates[index]);
 
     //clamp tooltip position
     const { width: tooltipWidth } = tooltipElement.getBoundingClientRect();
