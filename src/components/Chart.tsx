@@ -92,14 +92,15 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
 
     setHoveredIndex(index);
 
-    tooltipElement.style.top = `${yScale(list[index][KEYS.Kum_fall_100000inv])}px`;
-    tooltipElement.style.left = `${xScale(dates[index])}px`;
-    /*
-    sethoveredData({
-      val: list[index][KEYS.Kum_fall_100000inv],
-      date: dates[index],
-    });
-    */
+    let y = yScale(list[index][KEYS.Kum_fall_100000inv]);
+    let x = xScale(dates[index]);
+
+    //clamp tooltip position
+    const { width: tooltipWidth } = tooltipElement.getBoundingClientRect();
+    const minX = tooltipWidth * 0.5;
+    const maxX = window.screen.width - tooltipWidth * 0.5;
+    tooltipElement.style.top = `${Math.max(y, 0)}px`;
+    tooltipElement.style.left = `${clamp(x, minX, maxX)}px`;
   };
 
   return (
@@ -108,7 +109,7 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
         ref={tooltipRef}
         className={`${
           isHovering ? "" : "hidden"
-        } pointer-events-none absolute translate-x-[-50%] translate-y-[-100%] rounded-sm bg-white p-2 text-black dark:bg-black dark:text-white`}
+        } pointer-events-none absolute translate-x-[-50%] translate-y-[-105%] rounded-sm bg-white p-2 text-black dark:bg-black dark:text-white`}
       >
         {isHovering && hoveredIndex !== undefined && (
           <>
@@ -127,6 +128,7 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
       </div>
       <svg
         ref={ref}
+        onClick={() => setIsHovering(true)}
         onMouseOver={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
         onMouseMove={handleMouseMove}
@@ -212,4 +214,8 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
       </svg>
     </>
   );
+}
+
+function clamp(x: number, a: number, b: number) {
+  return Math.max(a, Math.min(x, b));
 }
