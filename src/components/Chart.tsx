@@ -132,7 +132,7 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
         onPointerOver={() => setIsHovering(true)}
         onPointerLeave={() => setIsHovering(false)}
         onPointerMove={handleMouseMove}
-        className={`h-full w-full overflow-x-hidden`}
+        className="h-full w-full select-none overflow-x-hidden"
         viewBox={`0 0 ${width} ${height}`}
       >
         {years.map((year, i) => {
