@@ -69,7 +69,7 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
   const [isHovering, setIsHovering] = useState(false);
 
   //const [hoveredData, sethoveredData] = useState<{ val: number; date: Date } | undefined>(undefined);
-  const handleMouseMove = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+  const handleMouseMove = (e: React.PointerEvent<SVGSVGElement>) => {
     const svgElement = ref.current;
     const tooltipElement = tooltipRef.current;
     if (!isHovering || !svgElement || !tooltipElement) {
@@ -97,8 +97,9 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
 
     //clamp tooltip position
     const { width: tooltipWidth } = tooltipElement.getBoundingClientRect();
-    const minX = tooltipWidth * 0.5;
-    const maxX = window.innerWidth - tooltipWidth * 0.5;
+    const halfW = tooltipWidth * 0.5 + 8;
+    const minX = halfW;
+    const maxX = window.innerWidth - halfW;
     tooltipElement.style.top = `${Math.max(y, 0)}px`;
     tooltipElement.style.left = `${clamp(x, minX, maxX)}px`;
   };
@@ -128,10 +129,9 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
       </div>
       <svg
         ref={ref}
-        onClick={() => setIsHovering(true)}
-        onMouseOver={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-        onMouseMove={handleMouseMove}
+        onPointerOver={() => setIsHovering(true)}
+        onPointerLeave={() => setIsHovering(false)}
+        onPointerMove={handleMouseMove}
         className={`h-full w-full overflow-x-hidden`}
         viewBox={`0 0 ${width} ${height}`}
       >
