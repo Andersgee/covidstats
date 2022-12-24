@@ -31,20 +31,24 @@ const Page: NextPage<Props> = ({ covidData }) => {
 
   return (
     <div className="container flex flex-col items-center px-2">
-      <h1 className="mt-40">Covid stats - How many had it?</h1>
-      <label htmlFor={selectId}>Region</label>
-      <select
-        id={selectId}
-        value={selectedRegion}
-        onChange={(e) => handleChange(e.target.value)}
-        className="bg-white p-2 text-black dark:bg-black dark:text-white"
-      >
-        {Object.keys(covidData).map((region) => (
-          <option key={region} value={region}>
-            {region}
-          </option>
-        ))}
-      </select>
+      <h1 className="my-10">Covid stats - How many had it?</h1>
+      <div className="flex items-baseline">
+        <label htmlFor={selectId} className="mr-1">
+          Region
+        </label>
+        <select
+          id={selectId}
+          value={selectedRegion}
+          onChange={(e) => handleChange(e.target.value)}
+          className="bg-white p-2 text-black dark:bg-black dark:text-white"
+        >
+          {Object.keys(covidData).map((region) => (
+            <option key={region} value={region}>
+              {region}
+            </option>
+          ))}
+        </select>
+      </div>
       <Chart data={covidData[selectedRegion]} />
     </div>
   );
