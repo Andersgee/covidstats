@@ -7,7 +7,7 @@ import { z } from "zod";
  */
 export const serverSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]),
-  MY_VAR: z.string(),
+  //MY_VAR: z.string(),
 });
 
 /**
