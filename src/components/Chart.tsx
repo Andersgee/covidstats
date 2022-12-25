@@ -88,8 +88,6 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
     let index = Math.round(fractionX * plottedWeeks);
     index = Math.min(list.length - 1, Math.max(0, index));
 
-    setHoveredIndex(index);
-
     const y = yScale(list[index][KEYS.Kum_fall_100000inv]);
     const x = xScale(dates[index]);
 
@@ -100,6 +98,8 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
     const maxX = window.innerWidth - halfW;
     tooltipElement.style.top = `${Math.max(y, 0)}px`;
     tooltipElement.style.left = `${clamp(x, minX, maxX)}px`;
+
+    setHoveredIndex(index);
   };
 
   return (
@@ -128,6 +128,7 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
       <svg
         ref={ref}
         onPointerMove={handleMouseMove}
+        onMouseLeave={() => setHoveredIndex(undefined)}
         className="h-full w-full select-none overflow-x-hidden"
         viewBox={`0 0 ${width} ${height}`}
       >
