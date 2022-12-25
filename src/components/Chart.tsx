@@ -96,8 +96,8 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
     //clamp tooltip position
     const { width: tooltipWidth } = tooltipElement.getBoundingClientRect();
     const halfW = tooltipWidth * 0.5 + 8;
-    const minX = bounds.left + halfW;
-    const maxX = bounds.right - halfW;
+    const minX = halfW;
+    const maxX = window.innerWidth - halfW;
     tooltipElement.style.top = `${Math.max(y, 0)}px`;
     tooltipElement.style.left = `${clamp(x, minX, maxX)}px`;
   };
@@ -127,7 +127,6 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
       </div>
       <svg
         ref={ref}
-        onPointerOut={() => setHoveredIndex(undefined)}
         onPointerMove={handleMouseMove}
         className="h-full w-full select-none overflow-x-hidden"
         viewBox={`0 0 ${width} ${height}`}
