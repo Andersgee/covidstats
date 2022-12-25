@@ -95,7 +95,7 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
     const { width: tooltipWidth } = tooltipElement.getBoundingClientRect();
     const halfW = tooltipWidth * 0.5 + 16;
     const minX = halfW;
-    const maxX = window.innerWidth - halfW;
+    const maxX = bounds.width - halfW;
     tooltipElement.style.top = `${Math.max(y, 0)}px`;
     tooltipElement.style.left = `${clamp(x, minX, maxX)}px`;
 
@@ -107,8 +107,10 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
       <div
         ref={tooltipRef}
         className={`${
-          hoveredIndex === undefined ? "hidden" : ""
-        } pointer-events-none absolute translate-x-[-50%] translate-y-[-105%] select-none rounded-sm bg-white p-2 text-black dark:bg-black dark:text-white`}
+          hoveredIndex === undefined
+            ? "invisible"
+            : "pointer-events-none absolute translate-x-[-50%] translate-y-[-105%] select-none rounded-sm bg-white p-2 text-black dark:bg-black dark:text-white"
+        }`}
       >
         {hoveredIndex !== undefined && (
           <>
