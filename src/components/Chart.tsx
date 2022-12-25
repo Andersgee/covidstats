@@ -93,7 +93,7 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
 
     //clamp tooltip position
     const { width: tooltipWidth } = tooltipElement.getBoundingClientRect();
-    const halfW = tooltipWidth * 0.5 + 16;
+    const halfW = tooltipWidth * 0.5;
     const minX = halfW;
     const maxX = bounds.width - halfW;
     tooltipElement.style.top = `${Math.max(y, 0)}px`;
