@@ -131,6 +131,7 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
         ref={ref}
         onPointerMove={(e) => handleMouseMove({ clientX: e.clientX })}
         onPointerLeave={() => setHoveredIndex(undefined)}
+        onTouchStart={(e) => handleMouseMove({ clientX: e.touches[0].clientX })}
         onTouchMove={(e) => handleMouseMove({ clientX: e.touches[0].clientX })}
         className="h-full w-full select-none overflow-x-hidden"
         viewBox={`0 0 ${width} ${height}`}
