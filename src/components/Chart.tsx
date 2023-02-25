@@ -67,7 +67,7 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
 
   const [hoveredIndex, setHoveredIndex] = useState<number | undefined>(undefined);
 
-  const handleMouseMove = (e: React.PointerEvent<SVGSVGElement>) => {
+  const handleMouseMove = ({ clientX }: { clientX: number }) => {
     const svgElement = ref.current;
     const tooltipElement = tooltipRef.current;
     if (!svgElement || !tooltipElement) {
@@ -81,7 +81,7 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
 
     const bounds = svgElement.getBoundingClientRect();
     const plottedWidth = bounds.width - margin.left - margin.right - startOffset - endOffset;
-    const mouseX = e.clientX - bounds.left - margin.left - startOffset;
+    const mouseX = clientX - bounds.left - margin.left - startOffset;
 
     const fractionX = mouseX / plottedWidth;
 
@@ -129,8 +129,9 @@ function ChartInner({ list, width, height }: ChartInnerProps) {
       </div>
       <svg
         ref={ref}
-        onPointerMove={handleMouseMove}
-        onMouseLeave={() => setHoveredIndex(undefined)}
+        onPointerMove={(e) => handleMouseMove({ clientX: e.clientX })}
+        onPointerLeave={() => setHoveredIndex(undefined)}
+        onTouchMove={(e) => handleMouseMove({ clientX: e.touches[0].clientX })}
         className="h-full w-full select-none overflow-x-hidden"
         viewBox={`0 0 ${width} ${height}`}
       >
