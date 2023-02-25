@@ -2,7 +2,7 @@
   "name": "covidstats",
   "short_name": "covidstats",
   "display": "fullscreen",
-  "orientation": "portrait",
+  "orientation": "any",
   "scope": "/",
   "start_url": "/",
   "icons": [
