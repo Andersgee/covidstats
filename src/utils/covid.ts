@@ -1,4 +1,5 @@
 import * as XLSX from "xlsx";
+import { hardcodedCovidData } from "./data";
 
 //store elements as array instead of object for more lightweight data
 
@@ -25,12 +26,15 @@ export const KEYS = {
   Kum_fall_100000inv: 5,
 } as const;
 
+export function getSweCovidData() {
+  return hardcodedCovidData;
+}
 /**
  * covid data from Folkhalsomyndigheten [Folkhalsomyndigheten](https://www.folkhalsomyndigheten.se/smittskydd-beredskap/utbrott/aktuella-utbrott/covid-19/statistik-och-analyser/bekraftade-fall-i-sverige/)
  *
  * Fetch an excel document and parse it. The file is updated daily.
  */
-export async function getSweCovidData() {
+export async function getSweCovidData_BEFORE_APR_2023() {
   const url = "https://www.arcgis.com/sharing/rest/content/items/b5e7488e117749c19881cce45db13f7e/data";
   const res = await fetch(url);
   const buf = await res.arrayBuffer();

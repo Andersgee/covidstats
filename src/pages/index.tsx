@@ -68,13 +68,13 @@ export default Page;
 //////////////////////////
 // props
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = () => {
   try {
-    const covidData = await getSweCovidData();
+    const covidData = getSweCovidData();
     const props: Props = { covidData };
     return {
       props,
-      revalidate: 60 * 60 * 24,
+      //revalidate: 60 * 60 * 24,
     };
   } catch (error) {
     throw new Error("something went wrong");
